@@ -2,6 +2,7 @@
 {{-- layout 으로 --}}
 @extends('products.layout')
 
+
 {{-- 아래 html 을 @yield('content') 에 보낸다고 생각하시면 됩니다. --}}
 @section('content')
     <h2 class="mt-4 mb-3">Posts List</h2>
@@ -53,8 +54,10 @@
     function checkPwd(num){
         let pwd = prompt("삭제하시겠습니까?(글작성시 입력한 비밀번호을 입력해주세요)")
         document.getElementById("pwdInput"+num).value=pwd
-
-
-
+    }
+    let msg = '{{Session::get('alert')}}';
+    let exist = '{{Session::has('alert')}}';
+    if(exist){
+      alert(msg);
     }
 </script>

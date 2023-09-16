@@ -55,11 +55,7 @@ class ProductController extends Controller
             $product->delete();
             return redirect()->route('products.index')->with('alert', '삭제되었습니다');
         } else {
-            return redirect()->route('products.index')->with('jsAlert', '비밀번호가 틀렸습니다');
+            return redirect()->route('products.index')->with('alert', '비밀번호가 틀렸습니다');
         }
-    }
-    public function test(Request $request, Product $product){
-        return $request;
-        return $product;
     }
 }
