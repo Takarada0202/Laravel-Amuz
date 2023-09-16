@@ -3,7 +3,7 @@
 
 @section('content')
 
-    <h2 class="mt-4 mb-3">Product Create</h2>
+    <h2 class="mt-4 mb-3">Post Create</h2>
 
     @if ($errors->any())
         <div class="alert alert-warning" role="alert">
@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    <form action="{{route('products.store')}}" method="post">
+    <form action="{{route('create.Product')}}" method="post">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">title</label>
@@ -27,7 +27,7 @@
         </div>
         <div class="mb-3">
             <label for="content" class="form-label">Content</label>
-            <textarea rows="10" cols="40" name="content" class="form-control" id="name" autocomplete="off"></textarea>
+            <textarea rows="10" cols="40" name="content" class="form-control" id="content" autocomplete="off"></textarea>
         </div>
         <div class="mb-3">
             <label for="name" class="form-label">pwd</label>

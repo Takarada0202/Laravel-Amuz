@@ -1,6 +1,6 @@
 @extends('products.layout')
 @section('content')
-    <h2 class="mt-4 mb-3">Product Edit</h2>
+    <h2 class="mt-4 mb-3">Post Edit</h2>
 
     {{-- 유효성 검사에 걸렸을 경우 --}}
     @if ($errors->any())

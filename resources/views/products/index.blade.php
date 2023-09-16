@@ -1,9 +1,10 @@
+
 {{-- layout 으로 --}}
 @extends('products.layout')
 
 {{-- 아래 html 을 @yield('content') 에 보낸다고 생각하시면 됩니다. --}}
 @section('content')
-    <h2 class="mt-4 mb-3">Product List</h2>
+    <h2 class="mt-4 mb-3">Posts List</h2>
 
     <a href="{{route("products.create")}}">
         <button type="button" class="btn btn-dark" style="float: right;">Create</button>
@@ -35,17 +36,25 @@
             <td>{{$product->created_at}}</td>
             <td>
                 <a href="{{route("products.edit", $product)}}">Edit</a>
-                <form action="{{route('products.destroy', $product->id)}}" method="post" style="display:inline-block;">
+                <form id="deleteForm" action="{{route('products.destroy', $product->id)}}" method="post" style="display:inline-block;">
                     @method('delete')
                     @csrf
-                    <input onclick="return confirm('정말로 삭제하겠습니까?')" type="submit" value="delete"/>
+                    <input id="pwdInput{{$product->id}}" value="delete"  name="pwd" onclick="return checkPwd({{ $product->id }})" type="submit"/>
                 </form>
             </td>
-            
+
         </tr>
         @endforeach
         </tbody>
     </table>
-
     {!! $products->links() !!}
 @endsection
+<script>
+    function checkPwd(num){
+        let pwd = prompt("삭제하시겠습니까?(글작성시 입력한 비밀번호을 입력해주세요)")
+        document.getElementById("pwdInput"+num).value=pwd
+
+
+
+    }
+</script>

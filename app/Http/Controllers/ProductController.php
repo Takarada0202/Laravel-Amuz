@@ -15,13 +15,13 @@ class ProductController extends Controller
 
     public function index(){
         $products = $this->product->latest()->paginate(10);
-        return view('products.index', compact('products')); 
+        return view('products.index', compact('products'));
     }
     public function create(){
         return view('products.create');
     }
 
-    public function store(Request $request)
+    public function createProduct(Request $request)
     {
         $request = $request->validate([
             'title' => 'required',
@@ -48,8 +48,18 @@ class ProductController extends Controller
         $product->update($request);
         return redirect()->route('products.index', $product);
     }
-    public function destroy(Product $product){
-        $product->delete();
-        return redirect()->route('products.index');
+    public function destroy(Product $product, request $request){
+        if($request == '' || $request == null) {
+            return redirect()->route('products.index')->with('alert', '비밀번호을 입력해주세요');
+        } else if($request -> pwd == $product -> pwd) {
+            $product->delete();
+            return redirect()->route('products.index')->with('alert', '삭제되었습니다');
+        } else {
+            return redirect()->route('products.index')->with('jsAlert', '비밀번호가 틀렸습니다');
+        }
+    }
+    public function test(Request $request, Product $product){
+        return $request;
+        return $product;
     }
 }
