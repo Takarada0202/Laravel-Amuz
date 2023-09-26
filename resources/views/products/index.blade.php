@@ -35,12 +35,15 @@
                 <a href="{{route("products.show", $product->id)}}">{{$product->title}}</a>
             </td>
             <td>{{$product->created_at}}</td>
-            <td>
-                <a href="{{route("products.edit", $product)}}">Edit</a>
+            <td class="d-flex justify-content-around">
+                <form action="{{ route('products.edit',$product) }}" method="get">
+                    <input type="submit" value="edit" name="pwd" id="eidtPwdInput{{$product->id}}" onclick="checkEidtPwd({{$product->id}})" >
+                </form>
+
                 <form id="deleteForm" action="{{route('products.destroy', $product->id)}}" method="post" style="display:inline-block;">
                     @method('delete')
                     @csrf
-                    <input id="pwdInput{{$product->id}}" value="delete"  name="pwd" onclick="return checkPwd({{ $product->id }})" type="submit"/>
+                    <input id="pwdInput{{$product->id}}" value="delete"  name="pwd" onclick="return checDelkPwd({{ $product->id }})" type="submit"/>
                 </form>
             </td>
 
@@ -51,9 +54,13 @@
     {!! $products->links() !!}
 @endsection
 <script>
-    function checkPwd(num){
+    function checDelkPwd(num){
         let pwd = prompt("삭제하시겠습니까?(글작성시 입력한 비밀번호을 입력해주세요)")
         document.getElementById("pwdInput"+num).value=pwd
+    }
+    function checkEidtPwd(num){
+        let editPwd = prompt("수정하시겠습니까?(글작성시 입력한 비밀번호을 입력해주세요)")
+        document.getElementById("eidtPwdInput"+num).value=editPwd
     }
     let msg = '{{Session::get('alert')}}';
     let exist = '{{Session::has('alert')}}';

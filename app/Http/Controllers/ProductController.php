@@ -36,7 +36,14 @@ class ProductController extends Controller
     public function show(Product $product){
         return view('products.show', compact('product'));
     }
-    public function edit(Product $product){
+    public function edit(Product $product, Request $request){
+        if($request == '' || $request == null) {
+            return redirect()->route('products.index')->with('alert', '비밀번호을 입력해주세요');
+        } else if($request -> pwd == $product -> pwd) {
+            return view('products.edit',compact('product'));
+        } else {
+            return redirect()->route('products.index')->with('alert', '비밀번호가 틀렸습니다');
+        }
         return view('products.edit', compact('product'));
     }
 
@@ -46,7 +53,7 @@ class ProductController extends Controller
             'content' => 'required'
         ]);
         $product->update($request);
-        return redirect()->route('products.index', $product);
+        return redirect()->route('products.index', $product)->with('alert', ' 수정되었습니다.');
     }
     public function destroy(Product $product, request $request){
         if($request == '' || $request == null) {
