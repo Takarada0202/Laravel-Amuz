@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\ProductController;
+use App\Http\Controllers\HomeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +17,7 @@ use \App\Http\Controllers\ProductController;
 */
 
 
-Route::get('/', [ProductController::class, 'index'])->name('products.index');
+Route::get('/', [ProductController::class, 'index'])->name('products.index')->middleware('verified');
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
 Route::post('/products/createProduct', [ProductController::class, 'createProduct'])->name('create.Product');
 Route::get('products/{product}',[ProductController::class, 'show'])->name("products.show");
@@ -24,5 +26,6 @@ Route::patch('products/{product}', [ProductController::class, 'update'])->name('
 Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('verified');
+Auth::routes(['verify' => true]);
