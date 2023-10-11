@@ -11,7 +11,15 @@ class ProductController extends Controller
 
     public function __construct(product $product){
         $this->product = $product;
+        $this->middleware('auth');
     }
+
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
 
     public function index(){
         $products = $this->product->latest()->paginate(10);

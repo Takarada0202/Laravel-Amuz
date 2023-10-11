@@ -27,5 +27,5 @@ Route::delete('products/{product}', [ProductController::class, 'destroy'])->name
 
 Auth::routes();
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('verified');
+Route::get('/home', [ProductController::class, 'index'])->name('home')->middleware('verified');
 Auth::routes(['verify' => true]);
