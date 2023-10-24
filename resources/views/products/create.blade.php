@@ -21,17 +21,13 @@
             <label for="title" class="form-label">Title</label>
             <input type="text" name="title" class="form-control" id="title" autocomplete="off">
         </div>
-        <div class="mb-3">
+        <div class="mb-3" style="display: none">
             <label for="name" class="form-label">Name</label>
-            <input type="text" name="name" class="form-control" id="name" autocomplete="off">
+            <input type="text" value="{{ Auth::user()->name }}" name="name" class="form-control" id="name" autocomplete="off">
         </div>
         <div class="mb-3">
             <label for="content" class="form-label">Content</label>
             <textarea rows="10" cols="40" name="content" class="form-control" id="content" autocomplete="off"></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="pwd" class="form-label">Password</label>
-            <input type="password" name="pwd" class="form-control" id="pwd" autocomplete="off">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
